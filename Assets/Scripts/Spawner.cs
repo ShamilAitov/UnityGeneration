@@ -4,10 +4,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GeneratingObjects : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
     [SerializeField] private Enemy _block;
     [SerializeField] private Transform _spawns;
+    [SerializeField] private float _seconds;
 
     private Transform[] _spawnPoints;
 
@@ -26,14 +27,14 @@ public class GeneratingObjects : MonoBehaviour
     private IEnumerator GraduallyAppear()
     {
         int spawnPointNamber;
-        var waitForTwoSeconds = new WaitForSeconds(2F);
+        var waitForSeconds = new WaitForSeconds(_seconds);
 
         while (true) 
         { 
             spawnPointNamber = Random.Range(0, _spawnPoints.Length);
             Instantiate(_block, _spawnPoints[spawnPointNamber].position, Quaternion.identity);
 
-            yield return waitForTwoSeconds;
+            yield return waitForSeconds;
         }
     }
 }
