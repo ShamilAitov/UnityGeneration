@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class GeneratingObjects : MonoBehaviour
 {
-    [SerializeField] private GameObject _block;
+    [SerializeField] private Enemy _block;
     [SerializeField] private Transform _spawns;
 
     private Transform[] _spawnPoints;
@@ -30,7 +31,7 @@ public class GeneratingObjects : MonoBehaviour
         while (true) 
         { 
             spawnPointNamber = Random.Range(0, _spawnPoints.Length);
-            Instantiate(_block, _spawnPoints[spawnPointNamber].position, Quaternion.identity);
+            Instantiate(_block.gameObject, _spawnPoints[spawnPointNamber].position, Quaternion.identity);
 
             yield return waitForTwoSeconds;
         }
